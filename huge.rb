@@ -87,6 +87,11 @@ class DrawTool
     end
     internal_square.insert(x1, 'x')
     internal_square.pop
+    while x1 + 1 < x2
+      internal_square.insert(x1 + 1, ' ')
+      internal_square.pop
+      x1 += 1
+    end
     internal_square.insert(x2, 'x')
     internal_square.pop
 
