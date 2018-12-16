@@ -73,9 +73,18 @@ class DrawTool
     create_horizontal_line((n - 1), (x1 - 1), (x2 - 1))
     create_horizontal_line(n, (x1 - 1), (x2 - 1))
     h -= 2
-    h.times do
-      clear_square(n, (x1 - 1), (x2 - 1))
-      n += 1
+    puts '¿Desea pintar el cuadro? Si = s / No = n'
+    paint = gets.chomp.to_s
+    if paint == 's'
+      h.times do
+        paint_square(n, (x1 - 1), (x2 - 1))
+        n += 1
+      end
+    else
+      h.times do
+        clear_square(n, (x1 - 1), (x2 - 1))
+        n += 1
+      end
     end
   end
 
@@ -99,5 +108,27 @@ class DrawTool
     @canvas.insert(n, mini_canva)
     @canvas.pop
   end
+
+  def paint_square(n, x1, x2)
+    internal_square = []
+    length = @canvas[n].size.to_i
+    length.times do
+      internal_square << '-'
+    end
+    internal_square.insert(x1, 'x')
+    internal_square.pop
+    while x1 + 1 < x2
+      internal_square.insert(x1 + 1, 'c')
+      internal_square.pop
+      x1 += 1
+    end
+    internal_square.insert(x2, 'x')
+    internal_square.pop
+
+    mini_canva = internal_square.join
+    @canvas.insert(n, mini_canva)
+    @canvas.pop
+  end
+
   # end of class
 end
